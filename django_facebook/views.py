@@ -1,9 +1,12 @@
 from django.contrib.auth import authenticate, login
 from django.contrib import auth
 from django.http import HttpResponseRedirect
+from django.conf import settings
 from django_facebook.utils import next_redirect
 from django_facebook.view_decorators import fashiolista_env
 from django.views.decorators.csrf import csrf_exempt
+from registration.forms import RegistrationFormUniqueEmail
+from registration.backends import get_backend
 
 
 @csrf_exempt
@@ -80,7 +83,10 @@ def _register_user(request, facebook, authenticated_user, profile_callback=None)
     request.template = 'registration/registration_form.html'
     request.context['facebook_mode'] = True
     facebook_data = {}
-    from registration.forms import RegistrationFormUniqueEmail
+    try:
+        backend = get_backend(settings.REGISTRATION_BACKEND)
+    except:
+        raise ValueError, 'Cannot get django-registration backend from settings.REGISTRATION_BACKEND'
     form_class = RegistrationFormUniqueEmail
     if facebook.is_authenticated():
         request.context['facebook_data'] = facebook_data = facebook.facebook_registration_data()
@@ -95,7 +101,9 @@ def _register_user(request, facebook, authenticated_user, profile_callback=None)
             initial={'ip': request.META['REMOTE_ADDR']})
 
         if form.is_valid():
-            new_user = form.save(profile_callback=profile_callback)
+            new_user = backend.register(request, **form.cleaned_data)
+            if profile_callback:
+                profile_callback()
             auth.login(request, new_user)
             member_overview_url = new_user.get_profile().url['overview']
             return HttpResponseRedirect(member_overview_url)
