@@ -35,10 +35,11 @@ to your global `url.py` file.
 
 ### Step 4 - Update your models
 
-Create a profile model from FacebookProfileModel from django-facebook/models.py.
+Create a profile model from `FacebookProfileModel` from `django-facebook/models.py`.
 
-Add a post_save signal handler for django.contrib.auth.models.User like:
+Add a post_save signal handler for `django.contrib.auth.models.User` like:
 
+<pre>
 from django.contrib.auth.models import User
 def create_profile(sender, instance, created, **kwargs):
     if created == True:
@@ -48,14 +49,17 @@ def create_profile(sender, instance, created, **kwargs):
             profile = YourProfileModel(user=instance)
             profile.save()
 post_save.connect(create_profile, sender=User)
+</pre>
 
-In settings.py assign your model name to AUTH_PROFILE_MODULE then specify the
+In `settings.py` assign your model name to `AUTH_PROFILE_MODULE` then specify the
 facebook authentication backend:
 
+<pre>
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'django_facebook.auth_backends.FacebookBackend',
 )
+</pre>
 
 ### Step 5 - Template
 
