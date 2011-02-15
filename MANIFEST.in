@@ -1,2 +1,2 @@
 include LICENSE.txt
-recursive-include examples *.html *.txt *.py *.js
+recursive-include examples *.html
