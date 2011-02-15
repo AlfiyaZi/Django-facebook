@@ -96,9 +96,7 @@ def _register_user(request, facebook, authenticated_user, profile_callback=None)
 
         if form.is_valid():
             new_user = form.save(profile_callback=profile_callback)
-            auth.login(request, new_user)
-            member_overview_url = new_user.get_profile().url['overview']
-            return HttpResponseRedirect(member_overview_url)
+            return _login_user(request, facebook, new_user, True)
     else:
         initial = facebook_data.copy()
         initial.update(request.GET.items())
