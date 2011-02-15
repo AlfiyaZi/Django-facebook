@@ -46,7 +46,13 @@ def create_profile(sender, instance, created, **kwargs):
         profile.save()
 post_save.connect(create_profile, sender=User)
 
-In settings.py assing your model name to AUTH_PROFILE_MODULE.
+In settings.py assing your model name to AUTH_PROFILE_MODULE then specify the
+facebook authentication backend:
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'django_facebook.auth_backends.FacebookBackend',
+)
 
 ### Step 5 - Template
 
