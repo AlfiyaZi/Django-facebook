@@ -49,7 +49,7 @@ def create_profile(sender, instance, created, **kwargs):
             profile.save()
 post_save.connect(create_profile, sender=User)
 
-In settings.py assing your model name to AUTH_PROFILE_MODULE then specify the
+In settings.py assign your model name to AUTH_PROFILE_MODULE then specify the
 facebook authentication backend:
 
 AUTHENTICATION_BACKENDS = (
