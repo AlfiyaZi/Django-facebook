@@ -36,7 +36,7 @@ setup(
     description = DESCRIPTION,
     long_description=long_description,
     classifiers = CLASSIFIERS,
-    install_requires = ('python-cjson', 'django-registration', 'PIL'),
+    install_requires = ('python-cjson', 'django-registration', 'python-notify', 'PIL'),
 )
 
 
