@@ -9,7 +9,7 @@ Login and registration functionality using the new facebook open graph api.
 
 * django.contrib.auth (Django core app, included)
 * django-registration
-* django-notify
+* django-notify (only on Django < 1.2)
 
 ## Implementation
 

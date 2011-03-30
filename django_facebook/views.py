@@ -4,6 +4,10 @@ from django.http import HttpResponseRedirect
 from django_facebook.utils import next_redirect
 from django_facebook.view_decorators import fashiolista_env
 from django.views.decorators.csrf import csrf_exempt
+try:
+    from django.contrib import messages
+except ImportError:
+    pass
 
 
 @csrf_exempt
@@ -43,7 +47,10 @@ def _connect_user(request, facebook):
         raise ValueError, 'Connect user can only be used on authenticated users'
     if facebook.is_authenticated():
         facebook_data = facebook.facebook_registration_data()
-        request.notifications.success("You have connected your account to %s's facebook profile" % facebook_data['name'])
+        try:
+            messages.success("You have connected your account to %s's facebook profile" % facebook_data['name'])
+        except NameError:
+            request.notifications.success("You have connected your account to %s's facebook profile" % facebook_data['name'])
         profile = request.user.get_profile()
         user = request.user
         #update the fields in the profile
