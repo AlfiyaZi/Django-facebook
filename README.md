@@ -33,6 +33,17 @@ to your global `url.py` file.
 
 [Facebook JS API](http://developers.facebook.com/docs/reference/javascript/)
 
+To add this, you can use the provided tag by adding:
+
+    {% load facebook_tags %}
+
+near the top of your document, and then adding:
+
+    {% load_facebook_sdk %}
+
+at the bottom, just before the closing body tag. The code is stored in the template
+<pre>facebook/load_sdk.html</pre>, so feel free to override it.
+
 ### Step 4 - Update your models
 
 Create a profile model from `FacebookProfileModel` from `django-facebook/models.py`.
