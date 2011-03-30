@@ -156,8 +156,8 @@ class FacebookAPI(GraphAPI):
         - exception
         - stacktrace
         '''
-        import cjson
-        message = 'The following facebook data failed %s with error %s' % (cjson.encode(original_facebook_data), unicode(e))
+        from django.core import serializers
+        message = 'The following facebook data failed %s with error %s' % (serializers.serialize("json", original_facebook_data), unicode(e))
         mail_admins('Broken facebook data', message)
 
 

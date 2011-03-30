@@ -1,6 +1,6 @@
-import cjson
 from django import shortcuts as django_shortcuts
 from django import http
+from django.core import serializers
 from django.template import RequestContext
 from django.contrib.auth import decorators
 from functools import partial
@@ -41,7 +41,7 @@ def _process_response(request, response):
     try:
         if isinstance(response, dict):
             if request.is_ajax():
-                return http.HttpResponse(cjson.encode(response),
+                return http.HttpResponse(serializers.serialize("json", response),
                     mimetype='application/json')
             else:
                 '''Add the dictionary to the context and let render_to_response

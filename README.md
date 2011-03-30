@@ -11,10 +11,6 @@ Login and registration functionality using the new facebook open graph api.
 * django-registration
 * django-notify
 
-## Additional dependencies
-
-* python-cjson
-
 ## Implementation
 
 ### Step 1 - Settings
