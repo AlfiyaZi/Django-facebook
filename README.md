@@ -42,7 +42,7 @@ near the top of your document, and then adding:
     {% load_facebook_sdk %}
 
 at the bottom, just before the closing body tag. The code is stored in the template
-<pre>facebook/load_sdk.html</pre>, so feel free to override it.
+"facebook/load_sdk.html", so feel free to override it.
 
 ### Step 4 - Update your models
 
