@@ -17,8 +17,6 @@ facebookClass.prototype = {
 
 F = new facebookClass();
 </script>
-<div class="inner_content" style="min-height: 268px;">
-    <form id="facebook_login" action="{% url facebook_connect %}?facebook_login=1" method="post">
-        <input value="Connect with Facebook" type="image" onclick="F.connect(this.parentNode);return false;" src="http://static.ak.fbcdn.net/images/fbconnect/login-buttons/connect_light_large_long.gif" />
-    </form>
-</div>
+<form id="facebook_login" action="{% url facebook_connect %}?facebook_login=1" method="post">
+    <input value="Connect with Facebook" type="image" onclick="F.connect(this.parentNode);return false;" src="http://static.ak.fbcdn.net/images/fbconnect/login-buttons/connect_light_large_long.gif" />
+</form>
