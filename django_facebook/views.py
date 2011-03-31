@@ -37,7 +37,7 @@ def connect(request):
                 action, user = connect_user(request)
             except facebook_exceptions.IncompleteProfileError, e:
                 logger.error(unicode(e))
-                messages.error(request, _("You need to allow the Facebook permissions in order to sign in."))
+                messages.error(request, _("Please allow the request for permission in order to log in."))
                 return next_redirect(request)
                 
             if action is CONNECT_ACTIONS.CONNECT:
