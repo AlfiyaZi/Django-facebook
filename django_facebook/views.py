@@ -37,9 +37,8 @@ def connect(request):
                 action, user = connect_user(request)
             except facebook_exceptions.IncompleteProfileError, e:
                 logger.error(unicode(e))
-                context['facebook_mode'] = True
-                context['form'] = e.form
-                return render_to_response('registration/registration_form.html', context)
+                messages.error(request, _("You need to allow the Facebook permissions in order to sign in."))
+                return next_redirect(request)
                 
             if action is CONNECT_ACTIONS.CONNECT:
                 messages.info(request, _("You have connected your account to %s's facebook profile") % facebook_data['name'])
