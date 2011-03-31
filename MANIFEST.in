@@ -1,2 +1,5 @@
 include LICENSE.txt
-recursive-include examples *.html
+include MANIFEST.in
+include README.rest
+recursive-include django_facebook/media *
+recursive-include django_facebook/templates *

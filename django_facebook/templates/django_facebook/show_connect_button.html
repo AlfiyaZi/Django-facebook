@@ -1,0 +1,24 @@
+<script>
+facebookClass = function() { this.initialize.apply(this, arguments); };
+facebookClass.prototype = {
+    initialize: function () {
+    },
+    
+    connect: function (formElement) {
+        //,'publish_stream','offline_access'
+        var requiredPerms = ['email','user_about_me','user_birthday','user_website'];
+        FB.login(function(response) {
+            formElement.submit();
+        },
+        {perms: requiredPerms.join(',')}
+        );
+    }
+};
+
+F = new facebookClass();
+</script>
+<div class="inner_content" style="min-height: 268px;">
+    <form id="facebook_login" action="{% url facebook_connect %}?facebook_login=1" method="post">
+        <input value="Connect with Facebook" type="image" onclick="F.connect(this.parentNode);return false;" src="http://static.ak.fbcdn.net/images/fbconnect/login-buttons/connect_light_large_long.gif" />
+    </form>
+</div>
