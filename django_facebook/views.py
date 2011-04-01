@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response, render_to_response
 from django.template.context import RequestContext, RequestContext
@@ -81,8 +82,8 @@ def my_style(request):
     
     return render_to_response('django_facebook/my_style.html', context)
 
-    
-    
 
-    
-
+def auth_logout(request, next_url="/"):
+    """Log a user out of the application."""
+    logout(request)
+    return HttpResponseRedirect(next_url)
